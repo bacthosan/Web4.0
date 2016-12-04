@@ -68,9 +68,6 @@ var create = function(){
 }
 
 var update = function(){
-  for(var i=0;i<Nakama.shipControllers.length;i++){
-    Nakama.shipControllers[i].update();
-  }
 
   Nakama.game.physics.arcade.overlap(Nakama.bulletGroup, Nakama.enemyGroup, onBulletHitActor);
 }
