@@ -1,6 +1,7 @@
 var Nakama = {};
 Nakama.configs = {
-  SHIP_SPEED : 200
+  SHIP_SPEED  : 200,
+  BULLET_SPEED: 1000
 }
 
 window.onload = function(){
@@ -32,61 +33,58 @@ var create = function(){
   Nakama.game.physics.startSystem(Phaser.Physics.ARCADE);
   Nakama.keyboard = Nakama.game.input.keyboard;
 
-  Nakama.ship = Nakama.game.add.sprite(
-    200,
-    400,
-    'assets',
-    "Spaceship1-Player.png");
-  Nakama.game.physics.enable(Nakama.ship, Phaser.Physics.ARCADE);
+  Nakama.bulletGroup = Nakama.game.add.physicsGroup();
+  Nakama.enemyGroup = Nakama.game.add.physicsGroup();
+  Nakama.playerGroup = Nakama.game.add.physicsGroup();
 
-  Nakama.ship2 = Nakama.game.add.sprite(
-    450,
-    400,
+  Nakama.shipControllers = [];
+
+  var player2 = new ShipController(400, 400, "Spaceship1-Partner.png", {
+    up    : Phaser.Keyboard.W,
+    down  : Phaser.Keyboard.S,
+    left  : Phaser.Keyboard.A,
+    right : Phaser.Keyboard.D,
+    fire  : Phaser.Keyboard.SHIFT,
+    cooldown: 0.1
+  });
+  Nakama.shipControllers.push(player2);
+
+  var player1 = new ShipController(200, 400, "Spaceship1-Player.png", {
+    up      : Phaser.Keyboard.UP,
+    down    : Phaser.Keyboard.DOWN,
+    left    : Phaser.Keyboard.LEFT,
+    right   : Phaser.Keyboard.RIGHT,
+    fire    : Phaser.Keyboard.SPACEBAR,
+    cooldown: 0.1
+  });
+  Nakama.shipControllers.push(player1);
+
+  var enemy = Nakama.enemyGroup.create(
+    320,
+    100,
     'assets',
-    "Spaceship1-Partner.png");
-  Nakama.game.physics.enable(Nakama.ship2, Phaser.Physics.ARCADE);
+    "EnemyType1.png");
+  enemy.health = 200;
 }
 
 var update = function(){
-  if(Nakama.keyboard.isDown(Phaser.Keyboard.UP)){
-    Nakama.ship.body.velocity.y = -Nakama.configs.SHIP_SPEED;
-  }
-  else if(Nakama.keyboard.isDown(Phaser.Keyboard.DOWN)){
-    Nakama.ship.body.velocity.y = Nakama.configs.SHIP_SPEED;
-  }
-  else{
-    Nakama.ship.body.velocity.y = 0;
+  for(var i=0;i<Nakama.shipControllers.length;i++){
+    Nakama.shipControllers[i].update();
   }
 
-  if(Nakama.keyboard.isDown(Phaser.Keyboard.LEFT)){
-    Nakama.ship.body.velocity.x = -Nakama.configs.SHIP_SPEED;
-  }
-  else if(Nakama.keyboard.isDown(Phaser.Keyboard.RIGHT)){
-    Nakama.ship.body.velocity.x = Nakama.configs.SHIP_SPEED;
-  }
-  else{
-    Nakama.ship.body.velocity.x = 0;
-  }
-
-  if(Nakama.keyboard.isDown(Phaser.Keyboard.W)){
-    Nakama.ship2.body.velocity.y = -Nakama.configs.SHIP_SPEED;
-  }
-  else if(Nakama.keyboard.isDown(Phaser.Keyboard.S)){
-    Nakama.ship2.body.velocity.y = Nakama.configs.SHIP_SPEED;
-  }
-  else{
-    Nakama.ship2.body.velocity.y = 0;
-  }
-
-  if(Nakama.keyboard.isDown(Phaser.Keyboard.A)){
-    Nakama.ship2.body.velocity.x = -Nakama.configs.SHIP_SPEED;
-  }
-  else if(Nakama.keyboard.isDown(Phaser.Keyboard.D)){
-    Nakama.ship2.body.velocity.x = Nakama.configs.SHIP_SPEED;
-  }
-  else{
-    Nakama.ship2.body.velocity.x = 0;
-  }
+  Nakama.game.physics.arcade.overlap(Nakama.bulletGroup, Nakama.enemyGroup, onBulletHitActor);
 }
+
+function onBulletHitActor(bulletSprite, actorSprite){
+  actorSprite.damage(1);
+  bulletSprite.kill();
+}
+
+
+
+
+
+
+
 
 var render = function(){}
