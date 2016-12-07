@@ -48,6 +48,8 @@ var create = function(){
   Nakama.enemyGroup = Nakama.game.add.physicsGroup();
   Nakama.playerGroup = Nakama.game.add.physicsGroup();
 
+
+  Nakama.bulletControllers = [];
   Nakama.shipControllers = [];
 
   var player1Constructor = getPlayerShipChoice("Player1");
@@ -71,19 +73,25 @@ var create = function(){
   });
   Nakama.shipControllers.push(player1);
 
-  var enemy = new EnemyController(new Phaser.Point(320, 100), "EnemyType1.png", {health: 100});
+  Nakama.enemies = [];
+  Nakama.enemies.push(new EnemyController(new Phaser.Point(320, 100), "EnemyType1.png", {health: 100}));
 }
 
 var update = function(){
   for(var i=0; i< Nakama.shipControllers.length;i++){
     Nakama.shipControllers[i].update();
   }
+  for(var i=0; i< Nakama.bulletControllers.length;i++){
+    if(Nakama.bulletControllers[i].update){
+      Nakama.bulletControllers[i].update();
+    }
+  }
   Nakama.game.physics.arcade.overlap(Nakama.bulletGroup, Nakama.enemyGroup, onBulletHitActor);
 }
 
 function onBulletHitActor(bulletSprite, actorSprite){
   actorSprite.damage(bulletSprite.power);
-  bulletSprite.kill();
+  bulletSprite.onHitTarget();
 }
 
 function getPlayerShipChoice(playerName){

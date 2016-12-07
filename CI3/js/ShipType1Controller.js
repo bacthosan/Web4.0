@@ -10,10 +10,10 @@ class ShipType1Controller extends ShipController{
   }
 
   fire(){
-    new BulletController(this.sprite.position, "BulletType1.png", new Phaser.Point(0, -10),{ power : 20 });
-    new BulletController(this.sprite.position, "BulletType1.png", new Phaser.Point(1, -10),{ power : 20 });
-    new BulletController(this.sprite.position, "BulletType1.png", new Phaser.Point(-1, -10),{ power : 20 });
-    new BulletController(this.sprite.position, "BulletType1.png", new Phaser.Point(5, -10),{ power : 20 });
-    new BulletController(this.sprite.position, "BulletType1.png", new Phaser.Point(-5, -10),{ power : 20 });
+    new BulletType1Controller(this.sprite.position, new Phaser.Point(0, -10),{ power : 20 });
+    new BulletType1Controller(this.sprite.position, new Phaser.Point(1, -10),{ power : 20 });
+    new BulletType1Controller(this.sprite.position, new Phaser.Point(-1, -10),{ power : 20 });
+    new BulletType1Controller(this.sprite.position, new Phaser.Point(5, -10),{ power : 20 });
+    new BulletType1Controller(this.sprite.position, new Phaser.Point(-5, -10),{ power : 20 });
   }
 }

@@ -10,6 +10,6 @@ class ShipType3Controller extends ShipController{
   }
 
   fire(){
-
+    new LaserController(this.sprite.position, this.sprite,{ power : 2, lifeTime: 0.1 });
   }
 }

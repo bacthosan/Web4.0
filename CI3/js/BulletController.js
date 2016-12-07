@@ -15,18 +15,17 @@ class BulletController {
     this.sprite.body.velocity = direction.setMagnitude(Nakama.configs.BULLET_SPEED);
     this.sprite.angle = Math.atan2(direction.x, -direction.y) * (180/Math.PI);
 
-    // Call explode when the sprite is killed
-    // this.sprite.events.onKilled.add(this.explode, this);
+    this.sprite.events.onKilled.add(this.explode, this);
+
+    this.sprite.onHitTarget = function(){
+      this.kill();
+    }
+
+    Nakama.bulletControllers.push(this);
   }
 
-  update(){
-
+  explode(){
+    Nakama.bulletControllers.splice(Nakama.bulletControllers.indexOf(this), 1);
+    this.sprite.destroy();
   }
-  //
-  // explode(){
-  //   var index = Nakama.bulletList.indexOf(this);
-  //   if(index > -1){
-  //     Nakama.bulletList.splice(index, 1);
-  //   }
-  // }
 }
