@@ -1,0 +1,43 @@
+header {
+  color: red;
+}
+
+#title {
+  background-color: brown;
+}
+
+.small_title {
+  text-decoration: underline;
+}
+
+.secondary_title{
+  font-style: italic;
+}
+
+[href="#title"] {
+  font-size: 50px;
+}
+
+.small_title{
+  color: blue;
+}
+
+.small_title.secondary_title{
+  border-top: 3px solid red;
+}
+
+.secondary_title .small_title{
+  text-decoration: line-through;
+}
+
+.secondary_title>.small_title{
+  /*color: #ffffff;*/
+}
+
+.small_title:hover{
+  background: yellow;
+}
+
+a:active{
+  color: green;
+}
