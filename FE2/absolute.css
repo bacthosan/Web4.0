@@ -1,0 +1,13 @@
+.relative_parent{
+  background-color: red;
+  width: 500px;
+  height: 500px;
+  position: relative;
+}
+
+.static_parent{
+  background-color: blue;
+  width: 500px;
+  height: 500px;
+  margin-left: 400px;
+}
