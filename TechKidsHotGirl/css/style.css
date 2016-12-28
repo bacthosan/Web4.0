@@ -1,0 +1,27 @@
+body{
+  background-color: #DFDFDF;
+}
+
+.header{
+  padding: 15px 0 10px;
+  background: #ffffff;
+}
+
+.search_form input[type=text]{
+  border-radius: 0;
+  padding-right: 23px;
+}
+
+.search_form .glyphicon-search{
+  position: absolute;
+  right: 22px;
+  top: 50%;
+  transform: translate(0, -50%);
+  color: #cecece;
+}
+
+.site_logo{
+  font-size: 22px;
+  line-height: 34px;
+  color: #00A0C6;
+}
