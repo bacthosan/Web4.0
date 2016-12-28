@@ -1,0 +1,17 @@
+.big_text_block{
+  background: blue;
+  font-size: 36px;
+}
+
+@media (min-width:768px){
+  .big_text_block{
+    background: red;
+    font-size: 48px;
+  }
+}
+
+@media print{
+  .big_text_block{
+    text-decoration: underline;
+  }
+}
