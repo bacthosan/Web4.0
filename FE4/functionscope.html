@@ -2,6 +2,29 @@
 <html>
   <head>
     <script>
+      function createObject(){
+        var privateProperty = 6;
+
+        var increment = function(){
+          privateProperty++;
+        }
+
+        var getPrivateProperty = function(){
+          return privateProperty;
+        }
+
+        return {
+          increment           : increment,
+          getPrivateProperty  : getPrivateProperty
+        }
+      }
+
+      var object = createObject();
+      object.increment();
+      object.getPrivateProperty(); // 7
+
+
+
       function getSailorSenshi(){
         var whatToSay = "Moon Prism power Make Up!!!"
 
