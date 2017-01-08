@@ -104,6 +104,10 @@ body{
   height: 50px;
   border-radius: 100%;
 }
+.author_avatar.author_avatar_big{
+  width: 130px;
+  height: 130px;
+}
 
 .plus_button{
   position: absolute;
@@ -125,4 +129,10 @@ body{
   left: 0;
   right: 0;
   color: #ffffff;
+}
+
+.item_modal_statistic>div{
+  width: 70px;
+  padding: 0 5px;
+  display: inline-block;
 }
